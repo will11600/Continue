@@ -12,11 +12,15 @@
       A library that extends the functionality of the Task class with extension methods for strongly-typed state objects.
     </Description>
     <PackageProjectUrl>https://github.com/will11600/Continue</PackageProjectUrl>
-    <PackageReadmeFile>../../README.md</PackageReadmeFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/will11600/Continue.git</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageVersion>1.0.0</PackageVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="README.md" />
+  </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' != 'net10.0'">
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.*" />
