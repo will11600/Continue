@@ -40,7 +40,7 @@ jobs:
       - name: NuGet push
         shell: pwsh
         run: |
-          $packages = Get-ChildItem -Path ./artifacts -Filter *.nupkg -File
+          $packages = Get-ChildItem -Path ./artifacts -Filter *.nupkg -File -Recurse
           if (-not $packages) {
             throw "No .nupkg files found in ./artifacts"
           }
