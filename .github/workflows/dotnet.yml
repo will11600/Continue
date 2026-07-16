@@ -23,13 +23,13 @@ jobs:
         run: dotnet restore
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build Continue.slnx --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test Continue.sln --configuration Release --no-build --verbosity normal --logger "trx"
+        run: dotnet test Continue.slnx --configuration Release --no-build --verbosity normal --logger "trx"
 
       - name: Pack
-        run: dotnet pack --configuration Release --no-build -o ./artifacts
+        run: dotnet pack Continue.slnx --configuration Release --no-build -o ./artifacts
 
       - name: NuGet login
         uses: NuGet/login@v1
