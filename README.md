@@ -1,22 +1,23 @@
 # Continue
 
-`Continue` is a small .NET library that adds strongly typed state overloads for `Task.ContinueWith`.
+`Continue` is a small .NET library that adds strongly typed state overloads for `Task.ContinueWith` and `CancellationToken.Register`.
 
-Instead of passing state through `object` and casting inside your continuation, you can keep your state type-safe from call site to callback.
+Instead of passing state through `object` and casting inside your continuation or callback, you can keep your state type-safe from call site to callback.
 
 ## Features
 
 - Strongly typed `ContinueWith` overloads for `Task`
 - Strongly typed `ContinueWith` overloads for `Task<TResult>`
-- Supports the most common continuation overload shapes
+- Strongly typed `Register` overloads for `CancellationToken`
+- Supports the most common continuation and cancellation overload shapes
 - Compatible with modern .NET, .NET Standard, and .NET Framework
 - AOT-friendly for supported targets
 
 ## Why use it?
 
-The built-in `Task.ContinueWith` APIs accept state as `object`. That works, but it usually means:
+The built-in `Task.ContinueWith` and `CancellationToken.Register` APIs accept state as `object`. That works, but it usually means:
 
-- manual casting inside continuation code
+- manual casting inside continuation or callback code
 - weaker compile-time safety
 - less readable call sites
 
@@ -34,7 +35,7 @@ Or add it directly to your project file:
 
 ```xml
 <ItemGroup>
-  <PackageReference Include="Continue" Version="1.0.0" />
+  <PackageReference Include="Continue" Version="2.0.0" />
 </ItemGroup>
 ```
 
@@ -81,9 +82,29 @@ Task<int> continuation = task.ContinueWith(
 	state);
 ```
 
+### `CancellationToken` registration
+
+```csharp
+using System;
+using System.Threading;
+using WB.Continue;
+
+var state = new CancellationContext("operation");
+var cts = new CancellationTokenSource();
+
+cts.Token.Register(
+	static (context) =>
+	{
+		Console.WriteLine($"Operation cancelled: {context.Name}");
+	},
+	state);
+```
+
 ## Available overloads
 
 `Continue` provides strongly typed overloads for these common patterns:
+
+### Task continuations
 
 - `ContinueWith<TState>(Action<Task, TState>, TState)`
 - `ContinueWith<TState>(Action<Task, TState>, TState, CancellationToken)`
@@ -95,6 +116,12 @@ Task<int> continuation = task.ContinueWith(
 - `ContinueWith<TResult, TState>(Func<Task<TResult>, TState, TResult>, TState, TaskContinuationOptions)`
 - `ContinueWith<TResult, TState>(Func<Task<TResult>, TState, TResult>, TState, TaskScheduler)`
 - `ContinueWith<TResult, TState>(Func<Task<TResult>, TState, TResult>, TState, CancellationToken, TaskContinuationOptions, TaskScheduler)`
+
+### CancellationToken registration
+
+- `Register<TState>(Action<TState, CancellationToken>, TState)` (.NET 6.0+)
+- `Register<TState>(Action<TState>, TState)`
+- `Register<TState>(Action<TState>, TState, bool useSynchronizationContext)`
 
 ## Notes
 
