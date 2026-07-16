@@ -45,5 +45,5 @@ jobs:
             throw "No .nupkg files found in ./artifacts"
           }
           foreach ($package in $packages) {
-            dotnet nuget push $package.FullName --api-key ${{steps.login.outputs.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json --skip-duplicate
+            dotnet nuget push $package.FullName --api-key "${{steps.login.outputs.NUGET_API_KEY}}" --source https://api.nuget.org/v3/index.json --skip-duplicate
           }
