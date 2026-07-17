@@ -35,7 +35,7 @@ Or add it directly to your project file:
 
 ```xml
 <ItemGroup>
-  <PackageReference Include="Continue" Version="2.0.0" />
+  <PackageReference Include="Continue" Version="3.0.0" />
 </ItemGroup>
 ```
 
@@ -116,6 +116,16 @@ cts.Token.Register(
 - `ContinueWith<TResult, TState>(Func<Task<TResult>, TState, TResult>, TState, TaskContinuationOptions)`
 - `ContinueWith<TResult, TState>(Func<Task<TResult>, TState, TResult>, TState, TaskScheduler)`
 - `ContinueWith<TResult, TState>(Func<Task<TResult>, TState, TResult>, TState, CancellationToken, TaskContinuationOptions, TaskScheduler)`
+- `ContinueWith<TResult, TState, TNewResult>(Func<Task<TResult>, TState, TNewResult>, TState)`
+- `ContinueWith<TResult, TState, TNewResult>(Func<Task<TResult>, TState, TNewResult>, TState, CancellationToken)`
+- `ContinueWith<TResult, TState, TNewResult>(Func<Task<TResult>, TState, TNewResult>, TState, TaskContinuationOptions)`
+- `ContinueWith<TResult, TState, TNewResult>(Func<Task<TResult>, TState, TNewResult>, TState, TaskScheduler)`
+- `ContinueWith<TResult, TState, TNewResult>(Func<Task<TResult>, TState, TNewResult>, TState, CancellationToken, TaskContinuationOptions, TaskScheduler)`
+- `ContinueWith<TResult, TState>(Func<Task, TState, TResult>, TState)`
+- `ContinueWith<TResult, TState>(Func<Task, TState, TResult>, TState, CancellationToken)`
+- `ContinueWith<TResult, TState>(Func<Task, TState, TResult>, TState, TaskContinuationOptions)`
+- `ContinueWith<TResult, TState>(Func<Task, TState, TResult>, TState, TaskScheduler)`
+- `ContinueWith<TResult, TState>(Func<Task, TState, TResult>, TState, CancellationToken, TaskContinuationOptions, TaskScheduler)`
 
 ### CancellationToken registration
 
